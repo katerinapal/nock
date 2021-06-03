@@ -1,9 +1,13 @@
+import imp_got_clientjs from "./got_client";
+import imp_indexjs from "..";
+import ext_assertrejects from "assert-rejects";
+import ext_chai from "chai";
 'use strict'
 
-const { expect } = require('chai')
-const assertRejects = require('assert-rejects')
-const nock = require('..')
-const got = require('./got_client')
+const { expect } = ext_chai
+const assertRejects = ext_assertrejects
+const nock = imp_indexjs
+const got = imp_got_clientjs
 
 describe('basic auth with username and password', () => {
   beforeEach(done => {

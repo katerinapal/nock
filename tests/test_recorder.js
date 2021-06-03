@@ -1,15 +1,24 @@
+import imp_indexjs from "./servers";
+import imp_got_clientjs from "./got_client";
+import imp_indexjs from "..";
+import ext_chai from "chai";
+import ext_sinon from "sinon";
+import ext_zlib from "zlib";
+import ext_url from "url";
+import ext_https from "https";
+import ext_http from "http";
 'use strict'
 
-const http = require('http')
-const https = require('https')
-const { URLSearchParams } = require('url')
-const zlib = require('zlib')
-const sinon = require('sinon')
-const { expect } = require('chai')
-const nock = require('..')
+const http = ext_http
+const https = ext_https
+const { URLSearchParams } = ext_url
+const zlib = ext_zlib
+const sinon = ext_sinon
+const { expect } = ext_chai
+const nock = imp_indexjs
 
-const got = require('./got_client')
-const servers = require('./servers')
+const got = imp_got_clientjs
+const servers = imp_indexjs
 
 describe('Recorder', () => {
   let globalCount
@@ -224,7 +233,7 @@ describe('Recorder', () => {
     const exampleText = '<html><body>example</body></html>'
 
     const { origin } = await servers.startHttpServer((request, response) => {
-      switch (require('url').parse(request.url).pathname) {
+      switch (ext_url.parse(request.url).pathname) {
         case '/':
           response.writeHead(302, { Location: '/abc' })
           break
@@ -684,7 +693,7 @@ describe('Recorder', () => {
     const exampleBody = '<html><body>example</body></html>'
 
     const { origin } = await servers.startHttpServer((request, response) => {
-      switch (require('url').parse(request.url).pathname) {
+      switch (ext_url.parse(request.url).pathname) {
         case '/':
           response.writeHead(302, { Location: '/abc' })
           break

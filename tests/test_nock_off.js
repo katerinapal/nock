@@ -1,11 +1,16 @@
+import imp_indexjs from "./servers";
+import imp_got_clientjs from "./got_client";
+import imp_indexjs from "..";
+import ext_http from "http";
+import ext_chai from "chai";
 'use strict'
 
-const { expect } = require('chai')
-const http = require('http')
-const nock = require('..')
+const { expect } = ext_chai
+const http = ext_http
+const nock = imp_indexjs
 
-const got = require('./got_client')
-const httpsServer = require('./servers')
+const got = imp_got_clientjs
+const httpsServer = imp_indexjs
 
 describe('NOCK_OFF env var', () => {
   let original
@@ -42,7 +47,7 @@ describe('NOCK_OFF env var', () => {
     const originalClient = http.ClientRequest
 
     delete require.cache[require.resolve('..')]
-    const newNock = require('..')
+    const newNock = imp_indexjs
 
     expect(http.ClientRequest).to.equal(originalClient)
     expect(newNock.isActive()).to.equal(false)

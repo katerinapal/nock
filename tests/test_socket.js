@@ -1,10 +1,15 @@
+import imp_indexjs from "..";
+import ext_stream from "stream";
+import ext_https from "https";
+import ext_http from "http";
+import ext_chai from "chai";
 'use strict'
 
-const { expect } = require('chai')
-const http = require('http')
-const https = require('https')
-const { Readable } = require('stream')
-const nock = require('..')
+const { expect } = ext_chai
+const http = ext_http
+const https = ext_https
+const { Readable } = ext_stream
+const nock = imp_indexjs
 
 it('should expose TLSSocket attributes for HTTPS requests', done => {
   nock('https://example.test').get('/').reply()

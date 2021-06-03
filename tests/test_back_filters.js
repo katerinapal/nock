@@ -1,14 +1,21 @@
+import imp_indexjs from "../";
+import imp_indexjs from "./servers";
+import imp_got_clientjs from "./got_client";
+import ext_rimraf from "rimraf";
+import ext_path from "path";
+import ext_fs from "fs";
+import ext_chai from "chai";
 'use strict'
 
-const { expect } = require('chai')
-const fs = require('fs')
-const path = require('path')
-const rimraf = require('rimraf')
+const { expect } = ext_chai
+const fs = ext_fs
+const path = ext_path
+const rimraf = ext_rimraf
 
-const got = require('./got_client')
-const { startHttpServer } = require('./servers')
+const got = imp_got_clientjs
+const { startHttpServer } = imp_indexjs
 
-const nock = require('../')
+const nock = imp_indexjs
 
 const nockBack = nock.back
 const originalMode = nockBack.currentMode

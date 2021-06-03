@@ -1,9 +1,13 @@
+import ext_assertrejects from "assert-rejects";
+import imp_got_clientjs from "./got_client";
+import imp_indexjs from "..";
+import ext_chai from "chai";
 'use strict'
 
-const { expect } = require('chai')
-const nock = require('..')
-const got = require('./got_client')
-const assertRejects = require('assert-rejects')
+const { expect } = ext_chai
+const nock = imp_indexjs
+const got = imp_got_clientjs
+const assertRejects = ext_assertrejects
 
 describe('repeating', () => {
   it('`once()`', async () => {

@@ -1,13 +1,21 @@
+import imp_got_clientjs from "./got_client";
+import imp_indexjs from "..";
+import ext_url from "url";
+import ext_assertrejects from "assert-rejects";
+import ext_sinon from "sinon";
+import ext_chai from "chai";
+import ext_https from "https";
+import ext_http from "http";
 'use strict'
 
-const http = require('http')
-const https = require('https')
-const { expect } = require('chai')
-const sinon = require('sinon')
-const assertRejects = require('assert-rejects')
-const url = require('url')
-const nock = require('..')
-const got = require('./got_client')
+const http = ext_http
+const https = ext_https
+const { expect } = ext_chai
+const sinon = ext_sinon
+const assertRejects = ext_assertrejects
+const url = ext_url
+const nock = imp_indexjs
+const got = imp_got_clientjs
 
 const acceptableGlobalKeys = new Set([
   ...Object.keys(global),

@@ -1,10 +1,15 @@
+import ext_sinonchai from "sinon-chai";
+import ext_sinon from "sinon";
+import ext_dirtychai from "dirty-chai";
+import ext_chai from "chai";
+import imp_indexjs from "..";
 'use strict'
 
-const nock = require('..')
-const chai = require('chai')
-const dirtyChai = require('dirty-chai')
-const sinon = require('sinon')
-const sinonChai = require('sinon-chai')
+const nock = imp_indexjs
+const chai = ext_chai
+const dirtyChai = ext_dirtychai
+const sinon = ext_sinon
+const sinonChai = ext_sinonchai
 
 chai.use(dirtyChai)
 chai.use(sinonChai)

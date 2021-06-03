@@ -1,10 +1,15 @@
+import imp_got_clientjs from "./got_client";
+import imp_indexjs from "../";
+import ext_formdata from "form-data";
+import ext_chai from "chai";
+import ext_assertrejects from "assert-rejects";
 'use strict'
 
-const assertRejects = require('assert-rejects')
-const { expect } = require('chai')
-const FormData = require('form-data')
-const nock = require('../')
-const got = require('./got_client')
+const assertRejects = ext_assertrejects
+const { expect } = ext_chai
+const FormData = ext_formdata
+const nock = imp_indexjs
+const got = imp_got_clientjs
 
 describe('`matchBody()`', () => {
   it('match json body regardless of key ordering', async () => {

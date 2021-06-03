@@ -1,9 +1,13 @@
+import imp_got_clientjs from "./got_client";
+import imp_indexjs from "..";
+import ext_sinon from "sinon";
+import ext_chai from "chai";
 'use strict'
 
-const { expect } = require('chai')
-const sinon = require('sinon')
-const nock = require('..')
-const got = require('./got_client')
+const { expect } = ext_chai
+const sinon = ext_sinon
+const nock = imp_indexjs
+const got = imp_got_clientjs
 
 // Tests for a regression where multiple ClientRequests call `.end` during the
 // same event loop iteration. https://github.com/nock/nock/issues/1937

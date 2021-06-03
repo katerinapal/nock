@@ -1,10 +1,13 @@
+import imp_indexjs from "..";
+import ext_chai from "chai";
+import ext_http from "http";
 'use strict'
 
 // Tests for `.replyWithError()`.
 
-const http = require('http')
-const { expect } = require('chai')
-const nock = require('..')
+const http = ext_http
+const { expect } = ext_chai
+const nock = imp_indexjs
 
 describe('`replyWithError()`', () => {
   it('returns an error through the request', done => {

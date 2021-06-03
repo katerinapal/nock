@@ -1,13 +1,20 @@
+import imp_indexjs from "./servers";
+import imp_got_clientjs from "./got_client";
+import ext_assertrejects from "assert-rejects";
+import ext_sinon from "sinon";
+import imp_indexjs from "..";
+import ext_chai from "chai";
+import ext_http from "http";
 'use strict'
 
-const http = require('http')
-const { expect } = require('chai')
-const nock = require('..')
-const sinon = require('sinon')
-const assertRejects = require('assert-rejects')
+const http = ext_http
+const { expect } = ext_chai
+const nock = imp_indexjs
+const sinon = ext_sinon
+const assertRejects = ext_assertrejects
 
-const got = require('./got_client')
-const servers = require('./servers')
+const got = imp_got_clientjs
+const servers = imp_indexjs
 
 describe('Nock lifecycle functions', () => {
   describe('`activate()`', () => {

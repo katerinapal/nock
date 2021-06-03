@@ -1,3 +1,7 @@
+import ext_fs from "fs";
+import ext_path from "path";
+import ext_https from "https";
+import ext_http from "http";
 'use strict'
 
 // With OpenSSL installed, you can set up your CA and certificates with
@@ -12,10 +16,10 @@
 //   openssl x509 -req -in localhost.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out localhost.crt -days 3650
 //   rm ca.srl localhost.csr
 //
-const http = require('http')
-const https = require('https')
-const path = require('path')
-const fs = require('fs')
+const http = ext_http
+const https = ext_https
+const path = ext_path
+const fs = ext_fs
 
 const servers = []
 
@@ -56,8 +60,10 @@ async function startHttpsServer(requestListener = defaultRequestListener) {
   return server
 }
 
-module.exports = {
+mod_indexjs = {
   ca: fs.readFileSync(path.resolve(__dirname, './ca.crt')),
   startHttpServer,
   startHttpsServer,
 }
+var mod_indexjs;
+export default mod_indexjs;

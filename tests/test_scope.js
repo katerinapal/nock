@@ -1,13 +1,22 @@
+import imp_scopejs from "../lib/scope";
+import imp_got_clientjs from "./got_client";
+import imp_indexjs from "..";
+import imp_interceptorjs from "../lib/interceptor";
+import ext_url from "url";
+import ext_proxyquire from "proxyquire";
+import ext_sinon from "sinon";
+import ext_chai from "chai";
+import ext_path from "path";
 'use strict'
 
-const path = require('path')
-const { expect } = require('chai')
-const sinon = require('sinon')
-const proxyquire = require('proxyquire').preserveCache()
-const url = require('url')
-const Interceptor = require('../lib/interceptor')
-const nock = require('..')
-const got = require('./got_client')
+const path = ext_path
+const { expect } = ext_chai
+const sinon = ext_sinon
+const proxyquire = ext_proxyquire.preserveCache()
+const url = ext_url
+const Interceptor = imp_interceptorjs
+const nock = imp_indexjs
+const got = imp_got_clientjs
 
 it('scope exposes interceptors', () => {
   const scopes = nock.load(
@@ -94,7 +103,7 @@ describe('`Scope#remove()`', () => {
 })
 
 it('loadDefs throws expected when fs is not available', () => {
-  const { loadDefs } = proxyquire('../lib/scope', { fs: null })
+  const { loadDefs } = imp_scopejs
 
   expect(() => loadDefs()).to.throw(Error, 'No fs')
 })

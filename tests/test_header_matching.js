@@ -1,11 +1,17 @@
+import imp_got_clientjs from "./got_client";
+import imp_indexjs from "..";
+import ext_sinon from "sinon";
+import ext_chai from "chai";
+import ext_assertrejects from "assert-rejects";
+import ext_http from "http";
 'use strict'
 
-const http = require('http')
-const assertRejects = require('assert-rejects')
-const { expect } = require('chai')
-const sinon = require('sinon')
-const nock = require('..')
-const got = require('./got_client')
+const http = ext_http
+const assertRejects = ext_assertrejects
+const { expect } = ext_chai
+const sinon = ext_sinon
+const nock = imp_indexjs
+const got = imp_got_clientjs
 
 describe('Header matching', () => {
   describe('`Scope.matchHeader()`', () => {

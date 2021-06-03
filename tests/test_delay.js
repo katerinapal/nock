@@ -1,14 +1,23 @@
+import imp_got_clientjs from "./got_client";
+import imp_indexjs from "..";
+import ext_sinon from "sinon";
+import ext_assertrejects from "assert-rejects";
+import ext_stream from "stream";
+import ext_http from "http";
+import ext_path from "path";
+import ext_chai from "chai";
+import ext_fs from "fs";
 'use strict'
 
-const fs = require('fs')
-const { expect } = require('chai')
-const path = require('path')
-const http = require('http')
-const stream = require('stream')
-const assertRejects = require('assert-rejects')
-const sinon = require('sinon')
-const nock = require('..')
-const got = require('./got_client')
+const fs = ext_fs
+const { expect } = ext_chai
+const path = ext_path
+const http = ext_http
+const stream = ext_stream
+const assertRejects = ext_assertrejects
+const sinon = ext_sinon
+const nock = imp_indexjs
+const got = imp_got_clientjs
 
 const textFilePath = path.resolve(__dirname, './assets/reply_file_1.txt')
 const textFileContents = fs.readFileSync(textFilePath, { encoding: 'utf8' })

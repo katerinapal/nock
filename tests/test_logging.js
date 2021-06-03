@@ -1,10 +1,15 @@
+import imp_got_clientjs from "./got_client";
+import imp_indexjs from "..";
+import ext_chai from "chai";
+import ext_sinon from "sinon";
+import ext_debug from "debug";
 'use strict'
 
-const debug = require('debug')
-const sinon = require('sinon')
-const { expect } = require('chai')
-const nock = require('..')
-const got = require('./got_client')
+const debug = ext_debug
+const sinon = ext_sinon
+const { expect } = ext_chai
+const nock = imp_indexjs
+const got = imp_got_clientjs
 
 describe('Logging using the `debug` package', () => {
   let logFn

@@ -1,8 +1,11 @@
+import imp_got_clientjs from "./got_client";
+import imp_indexjs from "..";
+import ext_chai from "chai";
 'use strict'
 
-const { expect } = require('chai')
-const nock = require('..')
-const got = require('./got_client')
+const { expect } = ext_chai
+const nock = imp_indexjs
+const got = imp_got_clientjs
 
 // "dynamic" refers to `reply` getting a single callback argument that returns or calls the callback with an array of [status, [body, headers]]]
 describe('dynamic `reply()` function', () => {

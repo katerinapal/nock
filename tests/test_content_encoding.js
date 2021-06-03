@@ -1,9 +1,13 @@
+import imp_got_clientjs from "./got_client";
+import imp_indexjs from "..";
+import ext_zlib from "zlib";
+import ext_chai from "chai";
 'use strict'
 
-const { expect } = require('chai')
-const zlib = require('zlib')
-const nock = require('..')
-const got = require('./got_client')
+const { expect } = ext_chai
+const zlib = ext_zlib
+const nock = imp_indexjs
+const got = imp_got_clientjs
 
 describe('Content Encoding', () => {
   it('should accept gzipped content', async () => {

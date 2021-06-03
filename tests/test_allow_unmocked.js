@@ -1,12 +1,18 @@
+import imp_indexjs from "./servers";
+import imp_got_clientjs from "./got_client";
+import imp_indexjs from "..";
+import ext_sinon from "sinon";
+import ext_http from "http";
+import ext_chai from "chai";
 'use strict'
 
-const { expect } = require('chai')
-const http = require('http')
-const sinon = require('sinon')
-const nock = require('..')
+const { expect } = ext_chai
+const http = ext_http
+const sinon = ext_sinon
+const nock = imp_indexjs
 
-const got = require('./got_client')
-const { startHttpServer } = require('./servers')
+const got = imp_got_clientjs
+const { startHttpServer } = imp_indexjs
 
 describe('allowUnmocked option', () => {
   it('with allowUnmocked, mocked request still works', async () => {

@@ -1,9 +1,13 @@
+import imp_indexjs from "..";
+import ext_sinon from "sinon";
+import ext_http from "http";
+import ext_chai from "chai";
 'use strict'
 
-const { expect } = require('chai')
-const http = require('http')
-const sinon = require('sinon')
-const nock = require('..')
+const { expect } = ext_chai
+const http = ext_http
+const sinon = ext_sinon
+const nock = imp_indexjs
 
 // These tests use `setTimeout` before verifying emitted events to ensure any
 // number of `nextTicks` or `setImmediate` can process first.

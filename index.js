@@ -1,7 +1,12 @@
+import imp_scopejs from "./lib/scope";
+import imp_recorderjs from "./lib/recorder";
+import imp_interceptjs from "./lib/intercept";
+import imp_global_emitterjs from "./lib/global_emitter";
+import imp_Back from "./lib/back";
 'use strict'
 
-const back = require('./lib/back')
-const emitter = require('./lib/global_emitter')
+const back = imp_Back
+const emitter = imp_global_emitterjs
 const {
   activate,
   isActive,
@@ -14,11 +19,11 @@ const {
   enableNetConnect,
   removeAll,
   abortPendingRequests,
-} = require('./lib/intercept')
-const recorder = require('./lib/recorder')
-const { Scope, load, loadDefs, define } = require('./lib/scope')
+} = imp_interceptjs
+const recorder = imp_recorderjs
+const { Scope, load, loadDefs, define } = imp_scopejs
 
-module.exports = (basePath, options) => new Scope(basePath, options)
+mod_indexjs = (basePath, options) => new Scope(basePath, options)
 
 Object.assign(module.exports, {
   activate,
@@ -51,3 +56,5 @@ Object.assign(module.exports, {
 if (isOn()) {
   back.setMode(process.env.NOCK_BACK_MODE || 'dryrun')
 }
+var mod_indexjs;
+export default mod_indexjs;

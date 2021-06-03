@@ -1,14 +1,20 @@
+import imp_got_clientjs from "./got_client";
+import imp_indexjs from "..";
+import ext_chai from "chai";
+import ext_assertrejects from "assert-rejects";
+import ext_path from "path";
+import ext_http from "http";
 'use strict'
 
 // `persist()` and `optionally()` are closely related. Their tests are both
 // contained in this file.
 
-const http = require('http')
-const path = require('path')
-const assertRejects = require('assert-rejects')
-const { expect } = require('chai')
-const nock = require('..')
-const got = require('./got_client')
+const http = ext_http
+const path = ext_path
+const assertRejects = ext_assertrejects
+const { expect } = ext_chai
+const nock = imp_indexjs
+const got = imp_got_clientjs
 
 const textFilePath = path.resolve(__dirname, './assets/reply_file_1.txt')
 

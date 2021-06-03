@@ -1,3 +1,10 @@
+import imp_match_body from "../lib/match_body";
+import imp_commonjs from "../lib/common";
+import imp_indexjs from "..";
+import ext_semver from "semver";
+import ext_sinon from "sinon";
+import ext_chai from "chai";
+import ext_http from "http";
 'use strict'
 
 // Nock's strategy is to test as much as possible either through the public API
@@ -11,14 +18,14 @@
 // 100% test coverage, so when utility code falls out of test, we know it's time
 // to remove it.
 
-const http = require('http')
-const { expect } = require('chai')
-const sinon = require('sinon')
-const semver = require('semver')
-const nock = require('..')
+const http = ext_http
+const { expect } = ext_chai
+const sinon = ext_sinon
+const semver = ext_semver
+const nock = imp_indexjs
 
-const common = require('../lib/common')
-const matchBody = require('../lib/match_body')
+const common = imp_commonjs
+const matchBody = imp_match_body
 
 // match_body has its own test file that tests the functionality from the API POV.
 // Since it's not in common.js does it make more sense for these six unit tests to move into that file?

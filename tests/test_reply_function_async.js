@@ -1,14 +1,19 @@
+import imp_got_clientjs from "./got_client";
+import imp_indexjs from "..";
+import ext_sinon from "sinon";
+import ext_assertrejects from "assert-rejects";
+import ext_chai from "chai";
 'use strict'
 
 // Tests for invoking `.reply()` with a function which invokes the error-first
 // callback with the response body or an array containing the status code and
 // optional response body and headers.
 
-const { expect } = require('chai')
-const assertRejects = require('assert-rejects')
-const sinon = require('sinon')
-const nock = require('..')
-const got = require('./got_client')
+const { expect } = ext_chai
+const assertRejects = ext_assertrejects
+const sinon = ext_sinon
+const nock = imp_indexjs
+const got = imp_got_clientjs
 
 describe('asynchronous `reply()` function', () => {
   describe('using callback', () => {

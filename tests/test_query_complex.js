@@ -1,7 +1,9 @@
+import imp_got_clientjs from "./got_client";
+import imp_indexjs from "..";
 'use strict'
 
-const nock = require('..')
-const got = require('./got_client')
+const nock = imp_indexjs
+const got = imp_got_clientjs
 
 describe('`query()` complex encoding', () => {
   it('query with array', async () => {
