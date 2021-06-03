@@ -1,14 +1,20 @@
+import got_client_got_clientjs from "./got_client";
+import _indexjs from "..";
+import ext_sinonjsfaketimers from "@sinonjs/fake-timers";
+import ext_sinon from "sinon";
+import ext_chai from "chai";
+import ext_http from "http";
 'use strict'
 
 // Tests for header objects passed to `.reply()`, including header objects
 // containing lambdas.
 
-const { IncomingMessage } = require('http')
-const { expect } = require('chai')
-const sinon = require('sinon')
-const fakeTimers = require('@sinonjs/fake-timers')
-const nock = require('..')
-const got = require('./got_client')
+const { IncomingMessage } = ext_http
+const { expect } = ext_chai
+const sinon = ext_sinon
+const fakeTimers = ext_sinonjsfaketimers
+const nock = _indexjs
+const got = got_client_got_clientjs
 
 describe('`reply()` headers', () => {
   describe('using parameter value', () => {
@@ -225,7 +231,7 @@ describe('`reply()` headers', () => {
     it('receives the correct arguments', async () => {
       const myHeaderFnCalled = sinon.spy()
 
-      const { ClientRequest: OverriddenClientRequest } = require('http')
+      const { ClientRequest: OverriddenClientRequest } = ext_http
       const scope = nock('http://example.test')
         .post('/')
         .reply(200, 'boo!', {

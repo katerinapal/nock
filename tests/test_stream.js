@@ -1,14 +1,23 @@
+import got_client_got_clientjs from "./got_client";
+import _indexjs from "..";
+import ext_sinon from "sinon";
+import ext_chai from "chai";
+import ext_util from "util";
+import ext_stream from "stream";
+import ext_path from "path";
+import ext_http from "http";
+import ext_events from "events";
 'use strict'
 
-const events = require('events')
-const http = require('http')
-const path = require('path')
-const stream = require('stream')
-const util = require('util')
-const { expect } = require('chai')
-const sinon = require('sinon')
-const nock = require('..')
-const got = require('./got_client')
+const events = ext_events
+const http = ext_http
+const path = ext_path
+const stream = ext_stream
+const util = ext_util
+const { expect } = ext_chai
+const sinon = ext_sinon
+const nock = _indexjs
+const got = got_client_got_clientjs
 
 const textFilePath = path.resolve(__dirname, './assets/reply_file_1.txt')
 

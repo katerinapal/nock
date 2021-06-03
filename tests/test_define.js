@@ -1,10 +1,15 @@
+import got_client_got_clientjs from "./got_client";
+import _indexjs from "..";
+import ext_assertrejects from "assert-rejects";
+import ext_chai from "chai";
+import ext_http from "http";
 'use strict'
 
-const http = require('http')
-const { expect } = require('chai')
-const assertRejects = require('assert-rejects')
-const nock = require('..')
-const got = require('./got_client')
+const http = ext_http
+const { expect } = ext_chai
+const assertRejects = ext_assertrejects
+const nock = _indexjs
+const got = got_client_got_clientjs
 
 describe('`define()`', () => {
   it('is backward compatible', async () => {

@@ -1,12 +1,18 @@
+import servers_indexjs from "./servers";
+import got_client_got_clientjs from "./got_client";
+import _indexjs from "..";
+import ext_sinon from "sinon";
+import ext_assertrejects from "assert-rejects";
+import ext_chai from "chai";
 'use strict'
 
-const { expect } = require('chai')
-const assertRejects = require('assert-rejects')
-const sinon = require('sinon')
-const nock = require('..')
+const { expect } = ext_chai
+const assertRejects = ext_assertrejects
+const sinon = ext_sinon
+const nock = _indexjs
 
-const got = require('./got_client')
-const servers = require('./servers')
+const got = got_client_got_clientjs
+const servers = servers_indexjs
 
 describe('`disableNetConnect()`', () => {
   it('prevents connection to unmocked hosts', async () => {

@@ -1,9 +1,13 @@
+import _indexjs from "..";
+import ext_sinon from "sinon";
+import ext_chai from "chai";
+import ext_http from "http";
 'use strict'
 
-const http = require('http')
-const { expect } = require('chai')
-const sinon = require('sinon')
-const nock = require('..')
+const http = ext_http
+const { expect } = ext_chai
+const sinon = ext_sinon
+const nock = _indexjs
 
 describe('IPv6', () => {
   it('IPV6 URL in http.get get gets mocked', done => {

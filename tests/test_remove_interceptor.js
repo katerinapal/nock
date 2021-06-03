@@ -1,8 +1,11 @@
+import got_client_got_clientjs from "./got_client";
+import _indexjs from "..";
+import ext_chai from "chai";
 'use strict'
 
-const { expect } = require('chai')
-const nock = require('..')
-const got = require('./got_client')
+const { expect } = ext_chai
+const nock = _indexjs
+const got = got_client_got_clientjs
 
 describe('`removeInterceptor()`', () => {
   context('when invoked with an Interceptor instance', () => {

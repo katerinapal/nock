@@ -1,14 +1,19 @@
+import got_client_got_clientjs from "./got_client";
+import _indexjs from "..";
+import ext_sinon from "sinon";
+import ext_chai from "chai";
+import ext_assertrejects from "assert-rejects";
 'use strict'
 
 // Tests for invoking `.reply()` with a synchronous function which return the
 // response body or an array containing the status code and optional response
 // body and headers.
 
-const assertRejects = require('assert-rejects')
-const { expect } = require('chai')
-const sinon = require('sinon')
-const nock = require('..')
-const got = require('./got_client')
+const assertRejects = ext_assertrejects
+const { expect } = ext_chai
+const sinon = ext_sinon
+const nock = _indexjs
+const got = got_client_got_clientjs
 
 describe('synchronous `reply()` function', () => {
   describe('when invoked with status code followed by function', () => {

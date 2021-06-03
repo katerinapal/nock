@@ -1,3 +1,11 @@
+import servers_indexjs from "./servers";
+import got_client_got_clientjs from "./got_client";
+import _indexjs from "..";
+import ext_sinon from "sinon";
+import ext_chai from "chai";
+import ext_url from "url";
+import ext_https from "https";
+import ext_http from "http";
 'use strict'
 
 // Tests of the RequestOverrider, which mocks http.ClientRequest and
@@ -10,15 +18,15 @@
 // assertions about how the mock client responds. Here the code under test is
 // the part of Nock that must interface with all http clients.
 
-const http = require('http')
-const https = require('https')
-const { URL } = require('url')
-const { expect } = require('chai')
-const sinon = require('sinon')
-const nock = require('..')
+const http = ext_http
+const https = ext_https
+const { URL } = ext_url
+const { expect } = ext_chai
+const sinon = ext_sinon
+const nock = _indexjs
 
-const got = require('./got_client')
-const servers = require('./servers')
+const got = got_client_got_clientjs
+const servers = servers_indexjs
 
 describe('Request Overrider', () => {
   it('response is an http.IncomingMessage instance', done => {

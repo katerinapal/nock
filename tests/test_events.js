@@ -1,12 +1,18 @@
+import got_client_got_clientjs from "./got_client";
+import _indexjs from "..";
+import ext_sinon from "sinon";
+import ext_path from "path";
+import ext_http from "http";
+import ext_chai from "chai";
 'use strict'
 
-const { expect } = require('chai')
-const http = require('http')
-const path = require('path')
-const sinon = require('sinon')
+const { expect } = ext_chai
+const http = ext_http
+const path = ext_path
+const sinon = ext_sinon
 
-const nock = require('..')
-const got = require('./got_client')
+const nock = _indexjs
+const got = got_client_got_clientjs
 
 function ignore() {}
 

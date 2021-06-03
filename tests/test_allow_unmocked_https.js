@@ -1,10 +1,14 @@
+import servers_indexjs from "./servers";
+import got_client_got_clientjs from "./got_client";
+import _indexjs from "..";
+import ext_chai from "chai";
 'use strict'
 
-const { expect } = require('chai')
-const nock = require('..')
+const { expect } = ext_chai
+const nock = _indexjs
 
-const got = require('./got_client')
-const servers = require('./servers')
+const got = got_client_got_clientjs
+const servers = servers_indexjs
 
 describe('allowUnmocked option (https)', () => {
   it('Nock with allowUnmocked and an url match', async () => {

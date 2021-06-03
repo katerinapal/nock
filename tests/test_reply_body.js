@@ -1,10 +1,13 @@
+import got_client_got_clientjs from "./got_client";
+import _indexjs from "..";
+import ext_chai from "chai";
 'use strict'
 
 // Tests for the body argument passed to `.reply()`.
 
-const { expect } = require('chai')
-const nock = require('..')
-const got = require('./got_client')
+const { expect } = ext_chai
+const nock = _indexjs
+const got = got_client_got_clientjs
 
 describe('`reply()` body', () => {
   it('stringifies an object', async () => {

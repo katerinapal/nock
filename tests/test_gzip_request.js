@@ -1,9 +1,13 @@
+import _indexjs from "..";
+import ext_zlib from "zlib";
+import ext_http from "http";
+import ext_chai from "chai";
 'use strict'
 
-const { expect } = require('chai')
-const http = require('http')
-const zlib = require('zlib')
-const nock = require('..')
+const { expect } = ext_chai
+const http = ext_http
+const zlib = ext_zlib
+const nock = _indexjs
 
 it('should accept and decode gzip encoded application/json', done => {
   const message = {

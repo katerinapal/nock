@@ -1,8 +1,11 @@
+import _indexjs from "..";
+import ext_http from "http";
+import ext_chai from "chai";
 'use strict'
 
-const { expect } = require('chai')
-const http = require('http')
-const nock = require('..')
+const { expect } = ext_chai
+const http = ext_http
+const nock = _indexjs
 
 describe('`res.destroy()`', () => {
   it('should emit error event if called with error', done => {

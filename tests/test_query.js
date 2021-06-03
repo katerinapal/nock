@@ -1,11 +1,17 @@
+import ext_assertrejects from "assert-rejects";
+import got_client_got_clientjs from "./got_client";
+import _indexjs from "..";
+import ext_url from "url";
+import ext_sinon from "sinon";
+import ext_chai from "chai";
 'use strict'
 
-const { expect } = require('chai')
-const sinon = require('sinon')
-const url = require('url')
-const nock = require('..')
-const got = require('./got_client')
-const assertRejects = require('assert-rejects')
+const { expect } = ext_chai
+const sinon = ext_sinon
+const url = ext_url
+const nock = _indexjs
+const got = got_client_got_clientjs
+const assertRejects = ext_assertrejects
 
 describe('query params in path', () => {
   it('matches that query string', async () => {

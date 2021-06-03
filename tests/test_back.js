@@ -1,15 +1,26 @@
+import libback_Back from "../lib/back";
+import servers_indexjs from "./servers";
+import _indexjs from "..";
+import ext_proxyquire from "proxyquire";
+import ext_sinon from "sinon";
+import ext_rimraf from "rimraf";
+import ext_path from "path";
+import ext_chai from "chai";
+import ext_fs from "fs";
+import ext_http from "http";
+import ext_crypto from "crypto";
 'use strict'
 
-const crypto = require('crypto')
-const http = require('http')
-const fs = require('fs')
-const { expect } = require('chai')
-const path = require('path')
-const rimraf = require('rimraf')
-const sinon = require('sinon')
-const proxyquire = require('proxyquire').preserveCache()
-const nock = require('..')
-const { startHttpServer } = require('./servers')
+const crypto = ext_crypto
+const http = ext_http
+const fs = ext_fs
+const { expect } = ext_chai
+const path = ext_path
+const rimraf = ext_rimraf
+const sinon = ext_sinon
+const proxyquire = ext_proxyquire.preserveCache()
+const nock = _indexjs
+const { startHttpServer } = servers_indexjs
 
 const { back: nockBack } = nock
 
@@ -234,7 +245,7 @@ describe('Nock Back', () => {
     })
 
     it('should throw the expected exception when fs is not available', () => {
-      const nockBackWithoutFs = proxyquire('../lib/back', { fs: null })
+      const nockBackWithoutFs = libback_Back
       nockBackWithoutFs.setMode('dryrun')
 
       nockBackWithoutFs.fixtures = path.resolve(__dirname, 'fixtures')
@@ -474,7 +485,7 @@ describe('Nock Back', () => {
     })
 
     it('should throw the expected exception when fs is not available', () => {
-      const nockBackWithoutFs = proxyquire('../lib/back', { fs: null })
+      const nockBackWithoutFs = libback_Back
       nockBackWithoutFs.setMode('record')
 
       nockBackWithoutFs.fixtures = path.resolve(__dirname, 'fixtures')

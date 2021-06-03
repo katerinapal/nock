@@ -1,11 +1,16 @@
+import servers_indexjs from "./servers";
+import _indexjs from "..";
+import ext_sinon from "sinon";
+import ext_http from "http";
+import ext_chai from "chai";
 'use strict'
 
-const { expect } = require('chai')
-const http = require('http')
-const sinon = require('sinon')
-const nock = require('..')
+const { expect } = ext_chai
+const http = ext_http
+const sinon = ext_sinon
+const nock = _indexjs
 
-const { startHttpServer } = require('./servers')
+const { startHttpServer } = servers_indexjs
 
 // Because `Got` makes use of the `http(s).request` convenience function, it can not be used during these tests.
 describe('Direct use of `ClientRequest`', () => {
