@@ -1,59 +1,67 @@
-import _indexjs from "..";
-import ext_chai from "chai";
-import ext_http from "http";
-'use strict'
+"use strict";
+
+var _ = require("..");
+
+var _2 = _interopRequireDefault(_);
+
+var _chai = require("chai");
+
+var _chai2 = _interopRequireDefault(_chai);
+
+var _http = require("http");
+
+var _http2 = _interopRequireDefault(_http);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+'use strict';
 
 // Tests for `.replyWithError()`.
 
-const http = ext_http
-const { expect } = ext_chai
-const nock = _indexjs
+var http = _http2.default;
+var expect = _chai2.default.expect;
 
-describe('`replyWithError()`', () => {
-  it('returns an error through the request', done => {
-    const scope = nock('http://example.test')
-      .post('/echo')
-      .replyWithError('Service not found')
+var nock = _2.default;
 
-    const req = http.request({
+describe('`replyWithError()`', function () {
+  it('returns an error through the request', function (done) {
+    var scope = nock('http://example.test').post('/echo').replyWithError('Service not found');
+
+    var req = http.request({
       host: 'example.test',
       method: 'POST',
       path: '/echo',
-      port: 80,
-    })
+      port: 80
+    });
 
-    req.on('error', e => {
-      expect(e)
-        .to.be.an.instanceof(Error)
-        .and.include({ message: 'Service not found' })
-      scope.done()
-      done()
-    })
+    req.on('error', function (e) {
+      expect(e).to.be.an.instanceof(Error).and.include({ message: 'Service not found' });
+      scope.done();
+      done();
+    });
 
-    req.end()
-  })
+    req.end();
+  });
 
-  it('allows json response', done => {
-    const scope = nock('http://example.test')
-      .post('/echo')
-      .replyWithError({ message: 'Service not found', code: 'test' })
+  it('allows json response', function (done) {
+    var scope = nock('http://example.test').post('/echo').replyWithError({ message: 'Service not found', code: 'test' });
 
-    const req = http.request({
+    var req = http.request({
       host: 'example.test',
       method: 'POST',
       path: '/echo',
-      port: 80,
-    })
+      port: 80
+    });
 
-    req.on('error', e => {
+    req.on('error', function (e) {
       expect(e).to.deep.equal({
         message: 'Service not found',
-        code: 'test',
-      })
-      scope.done()
-      done()
-    })
+        code: 'test'
+      });
+      scope.done();
+      done();
+    });
 
-    req.end()
-  })
-})
+    req.end();
+  });
+});

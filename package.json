@@ -22,6 +22,7 @@
     "main": "./index.js",
     "types": "types",
     "dependencies": {
+        "babel-runtime": "^6.26.0",
         "debug": "^4.1.0",
         "json-stringify-safe": "^5.0.1",
         "lodash.set": "^4.3.2",
@@ -30,6 +31,14 @@
     "devDependencies": {
         "@sinonjs/fake-timers": "^7.0.2",
         "assert-rejects": "^1.0.0",
+        "babel-cli": "latest",
+        "babel-core": "latest",
+        "babel-plugin-add-module-exports": "latest",
+        "babel-plugin-transform-es2015-modules-commonjs": "latest",
+        "babel-plugin-transform-object-rest-spread": "latest",
+        "babel-plugin-transform-runtime": "^6.23.0",
+        "babel-polyfill": "latest",
+        "babel-preset-env": "latest",
         "chai": "^4.1.2",
         "dirty-chai": "^2.0.1",
         "dtslint": "^4.0.4",
@@ -52,14 +61,7 @@
         "semantic-release": "^17.0.2",
         "sinon": "^10.0.0",
         "sinon-chai": "^3.3.0",
-        "typescript": "^4.2.2",
-        "babel-cli": "latest",
-        "babel-core": "latest",
-        "babel-plugin-add-module-exports": "latest",
-        "babel-plugin-transform-es2015-modules-commonjs": "latest",
-        "babel-polyfill": "latest",
-        "babel-plugin-transform-object-rest-spread": "latest",
-        "babel-preset-env": "latest"
+        "typescript": "^4.2.2"
     },
     "scripts": {
         "format:fix": "prettier --write '**/*.{js,json,md,ts,yml,yaml}'",

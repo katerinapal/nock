@@ -1,99 +1,193 @@
-import servers_indexjs from "./servers";
-import got_client_got_clientjs from "./got_client";
-import _indexjs from "..";
-import ext_chai from "chai";
-'use strict'
+"use strict";
 
-const { expect } = ext_chai
-const nock = _indexjs
+var _regenerator = require("babel-runtime/regenerator");
 
-const got = got_client_got_clientjs
-const servers = servers_indexjs
+var _regenerator2 = _interopRequireDefault(_regenerator);
 
-describe('allowUnmocked option (https)', () => {
-  it('Nock with allowUnmocked and an url match', async () => {
-    const { origin } = await servers.startHttpsServer((req, res) => {
-      res.writeHead(200)
-      res.end({ status: 'default' })
-    })
+var _stringify = require("babel-runtime/core-js/json/stringify");
 
-    const scope = nock(origin, { allowUnmocked: true })
-      .get('/urlMatch')
-      .reply(201, JSON.stringify({ status: 'intercepted' }))
+var _stringify2 = _interopRequireDefault(_stringify);
 
-    const { body, statusCode } = await got(`${origin}/urlMatch`, {
-      https: { certificateAuthority: servers.ca },
-    })
+var _asyncToGenerator2 = require("babel-runtime/helpers/asyncToGenerator");
 
-    expect(statusCode).to.equal(201)
-    expect(body).to.equal('{"status":"intercepted"}')
+var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
-    scope.done()
-  })
+var _servers = require("./servers");
 
-  it('allow unmocked option works with https', async () => {
-    const { origin } = await servers.startHttpsServer((request, response) => {
-      if (request.url === '/does/not/exist') {
-        response.writeHead(404)
-        response.end()
-        return
+var _servers2 = _interopRequireDefault(_servers);
+
+var _got_client = require("./got_client");
+
+var _got_client2 = _interopRequireDefault(_got_client);
+
+var _ = require("..");
+
+var _2 = _interopRequireDefault(_);
+
+var _chai = require("chai");
+
+var _chai2 = _interopRequireDefault(_chai);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+'use strict';
+
+var expect = _chai2.default.expect;
+
+var nock = _2.default;
+
+var got = _got_client2.default;
+var servers = _servers2.default;
+
+describe('allowUnmocked option (https)', function () {
+  it('Nock with allowUnmocked and an url match', (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
+    var _ref2, origin, scope, _ref3, body, statusCode;
+
+    return _regenerator2.default.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return servers.startHttpsServer(function (req, res) {
+              res.writeHead(200);
+              res.end({ status: 'default' });
+            });
+
+          case 2:
+            _ref2 = _context.sent;
+            origin = _ref2.origin;
+            scope = nock(origin, { allowUnmocked: true }).get('/urlMatch').reply(201, (0, _stringify2.default)({ status: 'intercepted' }));
+            _context.next = 7;
+            return got(origin + "/urlMatch", {
+              https: { certificateAuthority: servers.ca }
+            });
+
+          case 7:
+            _ref3 = _context.sent;
+            body = _ref3.body;
+            statusCode = _ref3.statusCode;
+
+
+            expect(statusCode).to.equal(201);
+            expect(body).to.equal('{"status":"intercepted"}');
+
+            scope.done();
+
+          case 13:
+          case "end":
+            return _context.stop();
+        }
       }
+    }, _callee, undefined);
+  })));
 
-      response.writeHead(200)
-      response.write('server response')
-      response.end()
-    })
+  it('allow unmocked option works with https', (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2() {
+    var _ref5, origin, client, scope, response1, response2, response3;
 
-    const client = got.extend({
-      prefixUrl: origin,
-      throwHttpErrors: false,
-      https: { certificateAuthority: servers.ca },
-    })
+    return _regenerator2.default.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.next = 2;
+            return servers.startHttpsServer(function (request, response) {
+              if (request.url === '/does/not/exist') {
+                response.writeHead(404);
+                response.end();
+                return;
+              }
 
-    const scope = nock(origin, { allowUnmocked: true })
-      .get('/abc')
-      .reply(200, 'mocked response')
-      .get('/wont/get/here')
-      .reply(500)
+              response.writeHead(200);
+              response.write('server response');
+              response.end();
+            });
 
-    const response1 = await client('abc')
-    expect(response1.statusCode).to.equal(200)
-    expect(response1.body).to.equal('mocked response')
-    expect(scope.isDone()).to.equal(false)
-    const response2 = await client('does/not/exist')
+          case 2:
+            _ref5 = _context2.sent;
+            origin = _ref5.origin;
+            client = got.extend({
+              prefixUrl: origin,
+              throwHttpErrors: false,
+              https: { certificateAuthority: servers.ca }
+            });
+            scope = nock(origin, { allowUnmocked: true }).get('/abc').reply(200, 'mocked response').get('/wont/get/here').reply(500);
+            _context2.next = 8;
+            return client('abc');
 
-    expect(response2.statusCode).to.equal(404)
-    expect(scope.isDone()).to.equal(false)
-    const response3 = await client('')
+          case 8:
+            response1 = _context2.sent;
 
-    expect(response3.statusCode).to.equal(200)
-    expect(response3.body).to.equal('server response')
-    expect(scope.isDone()).to.equal(false)
-  })
+            expect(response1.statusCode).to.equal(200);
+            expect(response1.body).to.equal('mocked response');
+            expect(scope.isDone()).to.equal(false);
+            _context2.next = 14;
+            return client('does/not/exist');
 
-  it('allow unmocked option works with https for a partial match', async () => {
-    // The `allowUnmocked` option is processed in two places. Once in the intercept when there
-    // are no interceptors that come close to matching the request. And again in the overrider when
-    // there are interceptors that partially match, eg just path, but don't completely match.
-    // This explicitly tests the later case in the overrider by making an HTTPS request for a path
-    // that has an interceptor but fails to match the query constraint.
-    const { origin } = await servers.startHttpsServer((request, response) => {
-      response.writeHead(201)
-      response.write('foo')
-      response.end()
-    })
+          case 14:
+            response2 = _context2.sent;
 
-    nock(origin, { allowUnmocked: true })
-      .get('/foo')
-      .query({ foo: 'bar' })
-      .reply(418)
 
-    // no query so wont match the interceptor
-    const { statusCode, body } = await got(`${origin}/foo`, {
-      https: { certificateAuthority: servers.ca },
-    })
+            expect(response2.statusCode).to.equal(404);
+            expect(scope.isDone()).to.equal(false);
+            _context2.next = 19;
+            return client('');
 
-    expect(statusCode).to.equal(201)
-    expect(body).to.equal('foo')
-  })
-})
+          case 19:
+            response3 = _context2.sent;
+
+
+            expect(response3.statusCode).to.equal(200);
+            expect(response3.body).to.equal('server response');
+            expect(scope.isDone()).to.equal(false);
+
+          case 23:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2, undefined);
+  })));
+
+  it('allow unmocked option works with https for a partial match', (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3() {
+    var _ref7, origin, _ref8, statusCode, body;
+
+    return _regenerator2.default.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.next = 2;
+            return servers.startHttpsServer(function (request, response) {
+              response.writeHead(201);
+              response.write('foo');
+              response.end();
+            });
+
+          case 2:
+            _ref7 = _context3.sent;
+            origin = _ref7.origin;
+
+
+            nock(origin, { allowUnmocked: true }).get('/foo').query({ foo: 'bar' }).reply(418);
+
+            // no query so wont match the interceptor
+            _context3.next = 7;
+            return got(origin + "/foo", {
+              https: { certificateAuthority: servers.ca }
+            });
+
+          case 7:
+            _ref8 = _context3.sent;
+            statusCode = _ref8.statusCode;
+            body = _ref8.body;
+
+
+            expect(statusCode).to.equal(201);
+            expect(body).to.equal('foo');
+
+          case 12:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3, undefined);
+  })));
+});

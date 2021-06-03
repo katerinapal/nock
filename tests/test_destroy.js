@@ -1,56 +1,72 @@
-import _indexjs from "..";
-import ext_http from "http";
-import ext_chai from "chai";
-'use strict'
+"use strict";
 
-const { expect } = ext_chai
-const http = ext_http
-const nock = _indexjs
+var _setImmediate2 = require("babel-runtime/core-js/set-immediate");
 
-describe('`res.destroy()`', () => {
-  it('should emit error event if called with error', done => {
-    nock('http://example.test').get('/').reply(404)
+var _setImmediate3 = _interopRequireDefault(_setImmediate2);
 
-    const respErr = new Error('Response error')
+var _ = require("..");
 
-    http
-      .get('http://example.test/', res => {
-        expect(res.statusCode).to.equal(404)
-        res.destroy(respErr)
-      })
-      .once('error', err => {
-        expect(err).to.equal(respErr)
-        done()
-      })
-  })
+var _2 = _interopRequireDefault(_);
 
-  it('should not emit error event if called without error', done => {
-    nock('http://example.test').get('/').reply(403)
+var _http = require("http");
 
-    http
-      .get('http://example.test/', res => {
-        expect(res.statusCode).to.equal(403)
-        res.destroy()
-        done()
-      })
-      .once('error', () => {
-        expect.fail('should not emit error')
-      })
-  })
+var _http2 = _interopRequireDefault(_http);
 
-  it('should not emit an response if destroyed first', done => {
-    nock('http://example.test').get('/').reply()
+var _chai = require("chai");
 
-    const req = http
-      .get('http://example.test/', () => {
-        expect.fail('should not emit a response')
-      })
-      .on('error', () => {}) // listen for error so "socket hang up" doesn't bubble
-      .on('socket', () => {
-        setImmediate(() => req.destroy())
-      })
+var _chai2 = _interopRequireDefault(_chai);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+'use strict';
+
+var expect = _chai2.default.expect;
+
+var http = _http2.default;
+var nock = _2.default;
+
+describe('`res.destroy()`', function () {
+  it('should emit error event if called with error', function (done) {
+    nock('http://example.test').get('/').reply(404);
+
+    var respErr = new Error('Response error');
+
+    http.get('http://example.test/', function (res) {
+      expect(res.statusCode).to.equal(404);
+      res.destroy(respErr);
+    }).once('error', function (err) {
+      expect(err).to.equal(respErr);
+      done();
+    });
+  });
+
+  it('should not emit error event if called without error', function (done) {
+    nock('http://example.test').get('/').reply(403);
+
+    http.get('http://example.test/', function (res) {
+      expect(res.statusCode).to.equal(403);
+      res.destroy();
+      done();
+    }).once('error', function () {
+      expect.fail('should not emit error');
+    });
+  });
+
+  it('should not emit an response if destroyed first', function (done) {
+    nock('http://example.test').get('/').reply();
+
+    var req = http.get('http://example.test/', function () {
+      expect.fail('should not emit a response');
+    }).on('error', function () {}) // listen for error so "socket hang up" doesn't bubble
+    .on('socket', function () {
+      (0, _setImmediate3.default)(function () {
+        return req.destroy();
+      });
+    });
 
     // give the `setImmediate` calls enough time to cycle.
-    setTimeout(() => done(), 10)
-  })
-})
+    setTimeout(function () {
+      return done();
+    }, 10);
+  });
+});

@@ -1,121 +1,289 @@
-import servers_indexjs from "./servers";
-import got_client_got_clientjs from "./got_client";
-import _indexjs from "..";
-import ext_sinon from "sinon";
-import ext_assertrejects from "assert-rejects";
-import ext_chai from "chai";
-'use strict'
+"use strict";
 
-const { expect } = ext_chai
-const assertRejects = ext_assertrejects
-const sinon = ext_sinon
-const nock = _indexjs
+var _regenerator = require("babel-runtime/regenerator");
 
-const got = got_client_got_clientjs
-const servers = servers_indexjs
+var _regenerator2 = _interopRequireDefault(_regenerator);
 
-describe('`disableNetConnect()`', () => {
-  it('prevents connection to unmocked hosts', async () => {
-    nock.disableNetConnect()
+var _asyncToGenerator2 = require("babel-runtime/helpers/asyncToGenerator");
 
-    nock('http://www.example.test').get('/').reply(200)
+var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
-    await assertRejects(
-      got('https://other.example.test/'),
-      /Nock: Disallowed net connect for "other.example.test:443\/"/
-    )
-  })
+var _servers = require("./servers");
 
-  it('prevents connections when no hosts are mocked', async () => {
-    nock.disableNetConnect()
+var _servers2 = _interopRequireDefault(_servers);
 
-    await assertRejects(got('http://example.test'), err => {
-      expect(err).to.include({
-        code: 'ENETUNREACH',
-        message: 'Nock: Disallowed net connect for "example.test:80/"',
-      })
-      expect(err.stack).to.be.a('string')
-      return true
-    })
-  })
-})
+var _got_client = require("./got_client");
 
-describe('`enableNetConnect()`', () => {
-  it('enables real HTTP request only for specified domain, via string', async () => {
-    const onResponse = sinon.spy()
-    const { origin } = await servers.startHttpServer((request, response) => {
-      onResponse()
-      response.writeHead(200)
-      response.end()
-    })
+var _got_client2 = _interopRequireDefault(_got_client);
 
-    nock.enableNetConnect('localhost')
+var _ = require("..");
 
-    await got(origin)
-    expect(onResponse).to.have.been.calledOnce()
-  })
+var _2 = _interopRequireDefault(_);
 
-  it('disallows request for other domains, via string', async () => {
-    nock.enableNetConnect('localhost')
+var _sinon = require("sinon");
 
-    await assertRejects(
-      got('https://example.test/'),
-      /Nock: Disallowed net connect for "example.test:443\/"/
-    )
-  })
+var _sinon2 = _interopRequireDefault(_sinon);
 
-  it('enables real HTTP request only for specified domain, via regexp', async () => {
-    const onResponse = sinon.spy()
-    const { origin } = await servers.startHttpServer((request, response) => {
-      onResponse()
-      response.writeHead(200)
-      response.end()
-    })
+var _assertRejects = require("assert-rejects");
 
-    nock.enableNetConnect(/ocalhos/)
+var _assertRejects2 = _interopRequireDefault(_assertRejects);
 
-    await got(origin)
-    expect(onResponse).to.have.been.calledOnce()
-  })
+var _chai = require("chai");
 
-  it('disallows request for other domains, via regexp', async () => {
-    nock.enableNetConnect(/ocalhos/)
+var _chai2 = _interopRequireDefault(_chai);
 
-    await assertRejects(
-      got('https://example.test/'),
-      /Nock: Disallowed net connect for "example.test:443\/"/
-    )
-  })
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-  it('enables real HTTP request only for specified domain, via function', async () => {
-    const onResponse = sinon.spy()
-    const { origin } = await servers.startHttpServer((request, response) => {
-      onResponse()
-      response.writeHead(200)
-      response.end()
-    })
+'use strict';
 
-    nock.enableNetConnect(host => host.includes('ocalhos'))
+var expect = _chai2.default.expect;
 
-    await got(origin)
-    expect(onResponse).to.have.been.calledOnce()
-  })
+var assertRejects = _assertRejects2.default;
+var sinon = _sinon2.default;
+var nock = _2.default;
 
-  it('disallows request for other domains, via function', async () => {
-    nock.enableNetConnect(host => host.includes('ocalhos'))
+var got = _got_client2.default;
+var servers = _servers2.default;
 
-    await assertRejects(
-      got('https://example.test/'),
-      /Nock: Disallowed net connect for "example.test:443\/"/
-    )
-  })
+describe('`disableNetConnect()`', function () {
+  it('prevents connection to unmocked hosts', (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
+    return _regenerator2.default.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            nock.disableNetConnect();
 
-  it('passes the domain to be tested, via function', async () => {
-    const matcher = sinon.stub().returns(false)
-    nock.enableNetConnect(matcher)
+            nock('http://www.example.test').get('/').reply(200);
 
-    await got('https://example.test/').catch(() => undefined) // ignore rejection, expected
+            _context.next = 4;
+            return assertRejects(got('https://other.example.test/'), /Nock: Disallowed net connect for "other.example.test:443\/"/);
 
-    expect(matcher).to.have.been.calledOnceWithExactly('example.test:443')
-  })
-})
+          case 4:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, undefined);
+  })));
+
+  it('prevents connections when no hosts are mocked', (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2() {
+    return _regenerator2.default.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            nock.disableNetConnect();
+
+            _context2.next = 3;
+            return assertRejects(got('http://example.test'), function (err) {
+              expect(err).to.include({
+                code: 'ENETUNREACH',
+                message: 'Nock: Disallowed net connect for "example.test:80/"'
+              });
+              expect(err.stack).to.be.a('string');
+              return true;
+            });
+
+          case 3:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2, undefined);
+  })));
+});
+
+describe('`enableNetConnect()`', function () {
+  it('enables real HTTP request only for specified domain, via string', (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3() {
+    var onResponse, _ref4, origin;
+
+    return _regenerator2.default.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            onResponse = sinon.spy();
+            _context3.next = 3;
+            return servers.startHttpServer(function (request, response) {
+              onResponse();
+              response.writeHead(200);
+              response.end();
+            });
+
+          case 3:
+            _ref4 = _context3.sent;
+            origin = _ref4.origin;
+
+
+            nock.enableNetConnect('localhost');
+
+            _context3.next = 8;
+            return got(origin);
+
+          case 8:
+            expect(onResponse).to.have.been.calledOnce();
+
+          case 9:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3, undefined);
+  })));
+
+  it('disallows request for other domains, via string', (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4() {
+    return _regenerator2.default.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            nock.enableNetConnect('localhost');
+
+            _context4.next = 3;
+            return assertRejects(got('https://example.test/'), /Nock: Disallowed net connect for "example.test:443\/"/);
+
+          case 3:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4, undefined);
+  })));
+
+  it('enables real HTTP request only for specified domain, via regexp', (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee5() {
+    var onResponse, _ref7, origin;
+
+    return _regenerator2.default.wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
+            onResponse = sinon.spy();
+            _context5.next = 3;
+            return servers.startHttpServer(function (request, response) {
+              onResponse();
+              response.writeHead(200);
+              response.end();
+            });
+
+          case 3:
+            _ref7 = _context5.sent;
+            origin = _ref7.origin;
+
+
+            nock.enableNetConnect(/ocalhos/);
+
+            _context5.next = 8;
+            return got(origin);
+
+          case 8:
+            expect(onResponse).to.have.been.calledOnce();
+
+          case 9:
+          case "end":
+            return _context5.stop();
+        }
+      }
+    }, _callee5, undefined);
+  })));
+
+  it('disallows request for other domains, via regexp', (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee6() {
+    return _regenerator2.default.wrap(function _callee6$(_context6) {
+      while (1) {
+        switch (_context6.prev = _context6.next) {
+          case 0:
+            nock.enableNetConnect(/ocalhos/);
+
+            _context6.next = 3;
+            return assertRejects(got('https://example.test/'), /Nock: Disallowed net connect for "example.test:443\/"/);
+
+          case 3:
+          case "end":
+            return _context6.stop();
+        }
+      }
+    }, _callee6, undefined);
+  })));
+
+  it('enables real HTTP request only for specified domain, via function', (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee7() {
+    var onResponse, _ref10, origin;
+
+    return _regenerator2.default.wrap(function _callee7$(_context7) {
+      while (1) {
+        switch (_context7.prev = _context7.next) {
+          case 0:
+            onResponse = sinon.spy();
+            _context7.next = 3;
+            return servers.startHttpServer(function (request, response) {
+              onResponse();
+              response.writeHead(200);
+              response.end();
+            });
+
+          case 3:
+            _ref10 = _context7.sent;
+            origin = _ref10.origin;
+
+
+            nock.enableNetConnect(function (host) {
+              return host.includes('ocalhos');
+            });
+
+            _context7.next = 8;
+            return got(origin);
+
+          case 8:
+            expect(onResponse).to.have.been.calledOnce();
+
+          case 9:
+          case "end":
+            return _context7.stop();
+        }
+      }
+    }, _callee7, undefined);
+  })));
+
+  it('disallows request for other domains, via function', (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee8() {
+    return _regenerator2.default.wrap(function _callee8$(_context8) {
+      while (1) {
+        switch (_context8.prev = _context8.next) {
+          case 0:
+            nock.enableNetConnect(function (host) {
+              return host.includes('ocalhos');
+            });
+
+            _context8.next = 3;
+            return assertRejects(got('https://example.test/'), /Nock: Disallowed net connect for "example.test:443\/"/);
+
+          case 3:
+          case "end":
+            return _context8.stop();
+        }
+      }
+    }, _callee8, undefined);
+  })));
+
+  it('passes the domain to be tested, via function', (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee9() {
+    var matcher;
+    return _regenerator2.default.wrap(function _callee9$(_context9) {
+      while (1) {
+        switch (_context9.prev = _context9.next) {
+          case 0:
+            matcher = sinon.stub().returns(false);
+
+            nock.enableNetConnect(matcher);
+
+            _context9.next = 4;
+            return got('https://example.test/').catch(function () {
+              return undefined;
+            });
+
+          case 4:
+            // ignore rejection, expected
+
+            expect(matcher).to.have.been.calledOnceWithExactly('example.test:443');
+
+          case 5:
+          case "end":
+            return _context9.stop();
+        }
+      }
+    }, _callee9, undefined);
+  })));
+});

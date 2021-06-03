@@ -2,6 +2,9 @@
     "presets": [],
     "plugins": [
         "add-module-exports",
-        "transform-object-rest-spread"
+        "transform-object-rest-spread",
+        ["transform-runtime", {
+            "regenerator": true
+          }]
     ]
 }
